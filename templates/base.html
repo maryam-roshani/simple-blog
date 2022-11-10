@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Book List</title>
+	<link rel="stylesheet" type="text/css" href="{% static '/myApp/styles.css' %}">
+	<h1>Books List</h1>
+</head>
+<body>
+	<a href="{% url 'myApp:list' %}"><img src="{% static '/myApp/logo.jpg' %}"></a>
+	<nav>
+		<ul>
+		{% if user.is_authenticated %}
+			<li>
+				<div class="logout">
+						<button type="submit"><a href="{% url 'accounts:logout' %}">Log Out</a></button>
+				</div>
+
+			</li>
+			<li><a href="{% url 'myApp:create' %}">A New Book</a></li>
+		{% else %}
+			<li><a href="{% url 'accounts:login' %}">Log In</a></li>
+			<li><a href="{% url 'accounts:signup' %}">Sign Up</a></li>
+		{% endif %}
+		</ul>
+	</nav>
+	{% block content %}
+	{% endblock %}
+</body>
+</html>
